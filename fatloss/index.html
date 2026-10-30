@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>減脂營養清單｜營養師李宗澄</title>
+<meta name="description" content="脂肪代謝需要哪些營養素，用每日與每週清單把營養素吃夠，再搭配合理的熱量赤字。">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="減脂清單">
+<meta name="theme-color" content="#1a4d3a">
+<style>
+  :root{
+    --ink:#1f2a24; --sub:#5f6b64; --faint:#8b958f; --line:#e3e8e4;
+    --bg:#f7f8f6; --card:#ffffff; --brand:#1a4d3a; --brand-soft:#e8f0eb;
+    --accent:#b7793a; --accent-soft:#f6ede3; --warn:#8a5a1c;
+    --strong:#1a4d3a; --strong-bg:#e3eee7; --pre:#7a5b17; --pre-bg:#f5eed8;
+    --lab:#4a5a78; --lab-bg:#e7ebf3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e6ebe7; --sub:#a9b4ad; --faint:#7d8781; --line:#2c3530;
+      --bg:#141917; --card:#1c2320; --brand:#8cc4a5; --brand-soft:#21312a;
+      --accent:#e0a96d; --accent-soft:#33291f; --warn:#e0b070;
+      --strong:#9fd2b5; --strong-bg:#22362c; --pre:#e4c77a; --pre-bg:#352e1a;
+      --lab:#aebbdb; --lab-bg:#262d3d;
+    }
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    font-size:17px; line-height:1.8;
+  }
+  header.top{
+    position:sticky; top:0; z-index:10; background:var(--card);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ max-width:760px; margin:0 auto; padding:10px 16px 0; font-size:14px; color:var(--sub); letter-spacing:1px; }
+  .brand b{ color:var(--brand); font-weight:600; }
+  nav{ max-width:760px; margin:0 auto; display:flex; gap:4px; overflow-x:auto; padding:6px 12px 8px; scrollbar-width:none; }
+  nav::-webkit-scrollbar{ display:none; }
+  nav a{
+    flex:0 0 auto; padding:6px 12px; border-radius:999px; font-size:15px;
+    color:var(--sub); text-decoration:none; white-space:nowrap;
+  }
+  nav a.on{ background:var(--brand); color:var(--card); }
+  main{ max-width:760px; margin:0 auto; padding:20px 16px 60px; }
+  section.page{ display:none; }
+  section.page.on{ display:block; }
+  h1{ font-size:26px; line-height:1.4; margin:8px 0 12px; }
+  h2{ font-size:21px; line-height:1.45; margin:28px 0 10px; }
+  h3{ font-size:18px; margin:0 0 6px; }
+  p{ margin:0 0 14px; }
+  .lead{ color:var(--sub); }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin:0 0 12px; }
+  .note{ background:var(--brand-soft); border-radius:12px; padding:14px 16px; margin:16px 0; font-size:16px; }
+  .note.warm{ background:var(--accent-soft); }
+  .small{ font-size:14px; color:var(--sub); }
+  ul.plain{ margin:0; padding-left:1.2em; }
+  ul.plain li{ margin:0 0 6px; }
+
+  /* 首頁入口 */
+  .entries{ display:grid; gap:12px; margin:20px 0; }
+  .entry{ display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .entry strong{ display:block; font-size:18px; color:var(--brand); margin-bottom:2px; }
+  .entry span{ color:var(--sub); font-size:15px; }
+
+  /* 代謝路徑 */
+  .path{ position:relative; margin:16px 0; }
+  .step{ position:relative; padding-left:44px; margin-bottom:10px; }
+  .step::before{
+    content:""; position:absolute; left:17px; top:36px; bottom:-14px; width:2px; background:var(--line);
+  }
+  .step:last-child::before{ display:none; }
+  .step .num{
+    position:absolute; left:4px; top:12px; width:28px; height:28px; border-radius:50%;
+    background:var(--brand); color:var(--card); font-size:14px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step button.head{
+    width:100%; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:12px 14px; font:inherit; color:inherit; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .step button.head .t{ font-weight:600; }
+  .step button.head .s{ display:block; font-size:14px; color:var(--sub); font-weight:normal; }
+  .step .chev{ color:var(--faint); transition:transform .2s; flex:0 0 auto; }
+  .step.open .chev{ transform:rotate(90deg); }
+  .step .body{ display:none; padding:12px 14px 4px; }
+  .step.open .body{ display:block; }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 12px; }
+  .chip{ display:inline-block; padding:3px 10px; border-radius:999px; background:var(--brand-soft); color:var(--brand); font-size:14px; }
+  .chip.side{ background:var(--accent-soft); color:var(--warn); }
+
+  /* 營養素卡 */
+  .ncards{ display:grid; gap:12px; }
+  @media (min-width:640px){ .ncards{ grid-template-columns:1fr 1fr; } }
+  .ncard h3{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .ncard .rda{ font-size:15px; color:var(--brand); font-weight:600; white-space:nowrap; }
+  .ncard .role{ font-size:14px; color:var(--sub); margin:0 0 8px; }
+  .ncard ul{ margin:0; padding-left:1.1em; font-size:15px; }
+
+  /* 清單 */
+  .daybar{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin:6px 0 8px; }
+  .daybar .date{ font-weight:600; }
+  .prog{ font-size:15px; color:var(--sub); }
+  .meter{ height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin:0 0 12px; }
+  .meter i{ display:block; height:100%; background:var(--brand); width:0; transition:width .25s; }
+  .item{ display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:0 0 8px; cursor:pointer; user-select:none; -webkit-user-select:none; }
+  .item input{ position:absolute; opacity:0; pointer-events:none; }
+  .box{ flex:0 0 26px; height:26px; border:2px solid var(--faint); border-radius:8px; margin-top:1px; display:flex; align-items:center; justify-content:center; }
+  .item.done .box{ background:var(--brand); border-color:var(--brand); }
+  .item.done .box::after{ content:""; width:7px; height:13px; border:solid var(--card); border-width:0 3px 3px 0; transform:rotate(45deg) translate(-1px,-1px); }
+  .item .txt{ flex:1; }
+  .item .txt b{ display:block; font-weight:600; }
+  .item .txt small{ display:block; font-size:14px; color:var(--sub); line-height:1.6; }
+  .item.done .txt b{ color:var(--sub); }
+  .witem{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:0 0 8px; }
+  .witem .row{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .witem b{ font-weight:600; }
+  .witem small{ display:block; font-size:14px; color:var(--sub); line-height:1.6; }
+  .witem.met b{ color:var(--brand); }
+  .dots{ display:flex; gap:6px; flex:0 0 auto; }
+  .dot{ width:30px; height:30px; border-radius:50%; border:2px solid var(--faint); background:transparent; padding:0; cursor:pointer; }
+  .dot.opt{ border-style:dashed; }
+  .dot.on{ background:var(--brand); border-color:var(--brand); }
+  .week{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin:8px 0 4px; }
+  .wd{ text-align:center; font-size:13px; color:var(--sub); }
+  .wd .bar{ height:48px; background:var(--line); border-radius:6px; position:relative; overflow:hidden; margin-bottom:4px; }
+  .wd .bar i{ position:absolute; left:0; right:0; bottom:0; background:var(--brand); }
+  .wd.today{ color:var(--brand); font-weight:600; }
+  .wd.future .bar{ opacity:.45; }
+  .btns{ display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 0; }
+  button.ghost{ font:inherit; font-size:14px; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--sub); cursor:pointer; }
+  .storewarn{ display:none; }
+
+  /* 表格與計算 */
+  table{ width:100%; border-collapse:collapse; font-size:16px; }
+  td,th{ text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ color:var(--sub); font-weight:normal; font-size:14px; width:34%; }
+  .calc label{ display:block; font-size:15px; color:var(--sub); margin:0 0 6px; }
+  .calc input[type=number]{ font:inherit; width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); }
+  .seg{ display:flex; gap:8px; margin:4px 0 14px; }
+  .seg button{ flex:1; font:inherit; font-size:15px; padding:9px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--sub); cursor:pointer; }
+  .seg button.on{ background:var(--brand); color:var(--card); border-color:var(--brand); }
+  .result{ font-size:22px; font-weight:600; color:var(--brand); margin:6px 0 2px; }
+
+  /* 停滯 */
+  .sym{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px; }
+  .sym button{ font:inherit; font-size:15px; padding:5px 12px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--sub); cursor:pointer; }
+  .sym button.on{ background:var(--brand); color:var(--card); border-color:var(--brand); }
+  .stall .clue{ font-size:15px; color:var(--sub); margin:0 0 6px; }
+  .stall .ev{ font-size:15px; margin:0; }
+  .badge{ display:inline-block; font-size:13px; padding:1px 9px; border-radius:999px; margin-left:6px; vertical-align:2px; font-weight:normal; }
+  .badge.strong{ background:var(--strong-bg); color:var(--strong); }
+  .badge.pre{ background:var(--pre-bg); color:var(--pre); }
+  .badge.lab{ background:var(--lab-bg); color:var(--lab); }
+  .stall.hide{ display:none; }
+
+  .refs li{ margin:0 0 12px; }
+  footer{ max-width:760px; margin:0 auto; padding:0 16px 40px; font-size:13px; color:var(--faint); line-height:1.7; }
+  footer a{ color:var(--sub); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><b>營養師李宗澄</b>　減脂營養指南</div>
+  <nav id="nav">
+    <a href="#home">首頁</a>
+    <a href="#checklist">每週清單</a>
+    <a href="#path">代謝路徑</a>
+    <a href="#nutrients">營養素</a>
+    <a href="#deficit">熱量赤字</a>
+    <a href="#stall">停滯檢查</a>
+    <a href="#groups">特別族群</a>
+    <a href="#refs">參考文獻</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- 首頁 -->
+<section class="page" id="home">
+  <h1>脂肪要被代謝掉，需要多種維生素和礦物質幫忙</h1>
+  <p class="lead">把這些營養素吃夠，再搭配合理的熱量赤字，減脂通常會比較順利。這個網站整理了脂肪代謝的五個階段、每個階段需要的營養素，以及一份每天、每週都能打勾的食物清單。</p>
+
+  <div class="entries">
+    <a class="entry" href="#path"><strong>脂肪代謝路徑</strong><span>脂肪從脂肪細胞到被用掉的五個階段，點開看每一步需要什麼。</span></a>
+    <a class="entry" href="#checklist"><strong>每週營養清單</strong><span>每日項目每天自動清空，每週項目每週一清空，紀錄存在你自己的手機裡。</span></a>
+    <a class="entry" href="#stall"><strong>停滯檢查</strong><span>體重卡住時，依照你的狀況找出可能原因和該做的檢查。</span></a>
+  </div>
+
+  <h2>先知道這三件事</h2>
+  <div class="card">
+    <h3>營養素吃夠之後，多補不會燒得更快</h3>
+    <p>營養素缺乏時，代謝路徑會被限制。補到充足之後，再多吃也不會讓脂肪代謝加速。脂肪減少多少，主要還是由熱量赤字決定。</p>
+  </div>
+  <div class="card">
+    <h3>缺乏通常是間接拖慢減脂</h3>
+    <p>多數人缺乏營養素時，會先感覺運動變吃力、訓練進步變慢、容易累。累了之後日常活動量變少，實際的熱量赤字就跟著變小，同時肌肉也比較容易流失。</p>
+  </div>
+  <div class="card">
+    <h3>實際做法</h3>
+    <p style="margin:0">用每日與每週清單確保營養素充足，再搭配合理的熱量赤字。如果還是停滯，用停滯檢查表一項一項排查。</p>
+  </div>
+</section>
+
+<!-- 每週清單 -->
+<section class="page" id="checklist">
+  <h1>每日與每週營養清單</h1>
+  <p class="lead">勾選紀錄只存在你這支手機的瀏覽器裡，別人看不到。每日項目每天換日時自動清空，每週項目每週一自動清空。</p>
+
+  <div class="note warm storewarn" id="storeWarn">這個瀏覽器目前無法儲存紀錄（常見於無痕模式）。可以照常勾選，但關掉頁面後會消失。</div>
+
+  <h2>今天</h2>
+  <div class="daybar"><span class="date" id="todayLabel"></span><span class="prog" id="dailyProg"></span></div>
+  <div class="meter"><i id="dailyMeter"></i></div>
+  <div id="dailyList"></div>
+
+  <h2>本週</h2>
+  <div class="daybar"><span class="date" id="weekLabel"></span><span class="prog" id="weeklyProg"></span></div>
+  <div class="meter"><i id="weeklyMeter"></i></div>
+  <p class="small">每吃一次就點一個圓圈，再點一次可以取消。虛線圓圈是可以多吃的次數。</p>
+  <div id="weeklyList"></div>
+
+  <h2>本週每日完成度</h2>
+  <div class="week" id="weekBars"></div>
+  <p class="small">每一格是當天每日項目完成的比例。</p>
+
+  <div class="btns">
+    <button class="ghost" id="resetDaily">清空今天</button>
+    <button class="ghost" id="resetWeekly">清空本週</button>
+  </div>
+
+  <h2>加到手機主畫面</h2>
+  <div class="card">
+    <p><b>iPhone：</b>用 Safari 打開這頁，點下方的分享按鈕，選「加入主畫面」。</p>
+    <p style="margin:0"><b>Android：</b>用 Chrome 打開這頁，點右上角選單，選「加到主畫面」或「安裝應用程式」。</p>
+  </div>
+  <p class="small">換手機、換瀏覽器或清除瀏覽器資料後，紀錄會重新開始。iPhone 如果太久沒打開，Safari 有可能清掉紀錄，加到主畫面後比較不會發生。</p>
+</section>
+
+<!-- 代謝路徑 -->
+<section class="page" id="path">
+  <h1>脂肪代謝的五個階段</h1>
+  <p class="lead">點每一個階段，看這一步在做什麼、需要哪些營養素。</p>
+  <div class="path" id="pathList"></div>
+  <div class="note warm">
+    <b>間接相關：甲狀腺</b><br>
+    甲狀腺荷爾蒙會影響整體代謝速率。維持甲狀腺功能需要碘、硒、鐵。
+    <div class="chips" style="margin-bottom:0"><span class="chip side">碘</span><span class="chip side">硒</span><span class="chip side">鐵</span></div>
+  </div>
+  <p class="small">這些營養素在缺乏時會限制代謝路徑，補到充足之後再多吃，不會讓脂肪燒得更快。</p>
+</section>
+
+<!-- 營養素 -->
+<section class="page" id="nutrients">
+  <h1>營養素資料卡</h1>
+  <p class="lead">建議量依《國人膳食營養素參考攝取量》第八版成人，標示「男／女」。食物含量為概估，實際依品種與烹調方式不同。</p>
+  <div class="ncards" id="ncards"></div>
+
+  <h2>吸收搭配</h2>
+  <div class="card">
+    <ul class="plain">
+      <li>植物性的鐵和鋅，搭配維生素C一起吃，例如菠菜配芭樂。</li>
+      <li>茶和咖啡跟正餐間隔1小時以上。</li>
+      <li>鈣片不要和高鐵的那一餐一起吃。</li>
+      <li>鐵和鋅的補充劑分開時段吃。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 熱量赤字 -->
+<section class="page" id="deficit">
+  <h1>熱量赤字的配套條件</h1>
+  <p class="lead">營養素吃夠是基礎，脂肪減少多少主要由熱量赤字決定。下面是多數人適用的範圍。</p>
+  <div class="card">
+    <table>
+      <tr><th>赤字幅度</th><td>每週體重下降0.5%到1%，一般人每天約少吃300至500大卡</td></tr>
+      <tr><th>熱量下限</th><td>女性多數不低於1200大卡，男性多數不低於1500大卡</td></tr>
+      <tr><th>蛋白質</th><td>一般人每公斤體重1.2至1.6g，有阻力訓練者1.6至2.2g</td></tr>
+      <tr><th>脂肪</th><td>不低於總熱量的20%</td></tr>
+      <tr><th>膳食纖維</th><td>每天25至35g</td></tr>
+      <tr><th>酒精</th><td>盡量減少</td></tr>
+    </table>
+  </div>
+
+  <h2>蛋白質計算</h2>
+  <div class="card calc">
+    <label for="bw">體重（公斤）</label>
+    <input type="number" id="bw" inputmode="decimal" min="30" max="250" placeholder="例如 65">
+    <label style="margin-top:14px">有沒有固定做重量訓練</label>
+    <div class="seg" id="trainSeg">
+      <button data-v="0" class="on">沒有</button>
+      <button data-v="1">有</button>
+    </div>
+    <div id="protOut" class="small">輸入體重後會顯示每天建議的蛋白質範圍。</div>
+  </div>
+  <p class="small">腎臟功能異常或有慢性疾病的人，蛋白質攝取量請先和醫師或營養師討論。</p>
+</section>
+
+<!-- 停滯 -->
+<section class="page" id="stall">
+  <h1>減脂停滯檢查</h1>
+  <p class="lead">點選你符合的狀況，下方會留下相關的可能原因。沒有點選時顯示全部。</p>
+  <div class="sym" id="symList"></div>
+  <div id="stallList"></div>
+  <p class="small">
+    <span class="badge strong" style="margin:0">證據較強</span> 研究結果較一致。
+    <span class="badge pre" style="margin:0 0 0 6px">初步證據</span> 有研究支持，但還需要更多研究。
+    <span class="badge lab" style="margin:0 0 0 6px">需抽血確認</span> 要靠檢查數值判斷。
+  </p>
+  <div class="note">
+    另外有初步研究在看維生素C與運動時脂肪氧化的關係，以及環境污染物和減重後代謝的關係，目前證據還不足以當作停滯的主要排查方向。
+  </div>
+  <div class="note warm">涉及抽血檢查的項目，請就醫或找營養師一起評估，不要自行判斷後大量補充。</div>
+</section>
+
+<!-- 族群 -->
+<section class="page" id="groups">
+  <h1>需要另外注意的族群</h1>
+  <div class="card"><h3>素食者</h3><p style="margin:0">維生素B12幾乎只存在於動物性食物，全素者需要補充。鐵和鋅也比較容易不足。</p></div>
+  <div class="card"><h3>經期女性與耐力運動員</h3><p style="margin:0">鐵的流失比較多，容易出現鐵不足，建議定期檢查ferritin。</p></div>
+  <div class="card"><h3>不吃海鮮與內臟的人</h3><p style="margin:0">鋅和碘比較容易不足。平時用加碘鹽，紅肉和蛋要吃夠。</p></div>
+  <div class="card"><h3>長者</h3><p style="margin:0">年紀增加後，多數人吸收B12的能力會下降，可以請醫師評估是否需要檢查或補充。</p></div>
+</section>
+
+<!-- 文獻 -->
+<section class="page" id="refs">
+  <h1>參考文獻</h1>
+  <ul class="plain refs">
+    <li><b>van der Beek 1988</b>：B群與維生素C攝取不足，會降低有氧運動能力。</li>
+    <li><b>Johnston 2006</b>：維生素C狀態與運動時脂肪氧化的關係。</li>
+    <li><b>Hinton 2000</b>：缺鐵但未貧血的女性，耐力訓練的適應較差。</li>
+    <li><b>Lukaski &amp; Nielsen</b>：鎂攝取偏低時，運動中的耗氧量增加。</li>
+    <li><b>Nedeltcheva 2010</b>：熱量限制期間睡眠不足，減掉的脂肪比例變少、肌肉流失變多。</li>
+    <li><b>Rosenbaum &amp; Leibel</b>：減重後瘦體素下降與代謝適應。</li>
+    <li><b>Tomiyama 2010</b>：熱量限制與皮質醇上升的關係。</li>
+    <li><b>Tremblay 2004</b>：減重過程中釋放的環境污染物與代謝速率。</li>
+    <li><b>Hjorth 2018</b>：腸道菌相組成與飲食減重效果的關係。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  本網站內容為衛教用途，不取代個別醫療建議。數值為概估，以官方建議量為準。<br>
+  © 營養師李宗澄　<a href="../">回到個人網站</a>
+</footer>
+
+<script>
+(function(){
+  // ---------- 資料 ----------
+  var DAILY = [
+    {id:'grain', t:'全穀雜糧至少1餐', n:'糙米、燕麥、地瓜、全麥麵包都算。提供B1、鎂。'},
+    {id:'egg',   t:'蛋1至2顆', n:'提供B2、B12、生物素、硒。'},
+    {id:'dairy', t:'乳品1.5至2杯', n:'牛奶、無糖優格、起司都算。提供B2、B12。'},
+    {id:'prot',  t:'蛋白質每餐一掌心', n:'肉、魚、蛋、豆製品。提供菸鹼素、B6。'},
+    {id:'veg',   t:'蔬菜3份以上，深綠色至少1碗', n:'深綠葉菜提供鎂、B2。'},
+    {id:'vitc',  t:'高維生素C水果1份', n:'芭樂半顆或奇異果1至2顆。'},
+    {id:'nut',   t:'堅果種子1份', n:'南瓜子優先，提供鎂和鋅。'}
+  ];
+  var WEEKLY = [
+    {id:'red',   t:'紅肉2至3次', min:2, max:3, n:'牛肉、羊肉，提供鐵和鋅。'},
+    {id:'shell', t:'貝類1至2次', min:1, max:2, n:'蚵仔、蛤蜊，提供鋅、B12。'},
+    {id:'fish',  t:'魚2至3次', min:2, max:3, n:'其中1次選鮪魚、鯖魚或鮭魚。'},
+    {id:'pork',  t:'豬肉2次', min:2, max:2, n:'豬里肌提供B1。'},
+    {id:'soy',   t:'豆製品3次以上', min:3, max:5, n:'豆腐、豆干、豆漿。'},
+    {id:'mush',  t:'菇類3次', min:3, max:3, n:'提供B2、菸鹼素。'},
+    {id:'sea',   t:'海帶或紫菜1至2次', min:1, max:2, n:'提供碘，平時用加碘鹽。'},
+    {id:'liver', t:'豬肝每兩週1次（可選）', min:0, max:1, n:'提供鐵、B12。這週吃過，下週可以不吃。'}
+  ];
+  var STAGES = [
+    {t:'脂解', s:'脂肪細胞把脂肪分解出來',
+     d:'脂肪細胞裡的三酸甘油酯，被脂解酶分解成游離脂肪酸和甘油。脂肪酸進入血液後，由白蛋白帶到肌肉等需要能量的組織。',
+     need:['ATP','鎂','蛋白質（白蛋白運送）']},
+    {t:'脂肪酸活化', s:'脂肪酸接上輔酶A',
+     d:'脂肪酸進到細胞後，要先接上輔酶A才能進一步代謝，這一步會消耗ATP。輔酶A的原料是維生素B5（泛酸）。',
+     need:['B5 泛酸（輔酶A）','ATP','鎂']},
+    {t:'進入粒線體', s:'靠肉鹼把脂肪酸送進粒線體',
+     d:'長鏈脂肪酸無法自己穿過粒線體的內膜，要靠肉鹼幫忙運送。身體可以自己合成肉鹼，合成過程需要維生素C、B6、B3和鐵。',
+     need:['肉鹼','維生素C','B6','B3','鐵']},
+    {t:'β-氧化', s:'每次切下兩個碳',
+     d:'脂肪酸在粒線體裡一次切下兩個碳，變成乙醯輔酶A，同時產生FADH₂和NADH。少數碳數是奇數的脂肪酸，最後一段需要生物素和B12才能接著代謝。',
+     need:['B2（FAD）','B3（NAD⁺）','B5'], side:['生物素','B12（奇數碳脂肪酸）']},
+    {t:'檸檬酸循環與電子傳遞鏈', s:'產生能量，最後交給氧氣',
+     d:'乙醯輔酶A進入檸檬酸循環，產生的NADH和FADH₂再交給電子傳遞鏈製造ATP，電子最後交給氧氣，產生水和二氧化碳。',
+     need:['B1','B2','B3','B5','硫辛酸','輔酶Q10','鐵','銅','氧氣']}
+  ];
+  var NUTS = [
+    {n:'維生素B1', r:'1.2／0.9 mg', role:'檸檬酸循環', f:['豬里肌100g約0.8至1.0mg','全穀雜糧']},
+    {n:'維生素B2', r:'1.3／1.0 mg', role:'β-氧化（FAD）、電子傳遞鏈', f:['牛奶240ml約0.4mg','蛋2顆約0.5mg','菇類、深綠葉菜']},
+    {n:'菸鹼素（B3）', r:'16／14 mg NE', role:'β-氧化（NAD⁺）、肉鹼合成、電子傳遞鏈', f:['雞胸100g約10至14mg']},
+    {n:'維生素B6', r:'1.5 mg', role:'肉鹼合成', f:['雞胸100g約0.6mg','香蕉1根約0.4mg']},
+    {n:'維生素B12', r:'2.4 µg', role:'奇數碳脂肪酸代謝', f:['鮭魚100g約3µg','牛奶240ml加蛋2顆約2µg']},
+    {n:'泛酸（B5）', r:'5 mg', role:'輔酶A的原料，脂肪酸活化與β-氧化', f:['均衡飲食通常足夠']},
+    {n:'生物素', r:'30 µg', role:'奇數碳脂肪酸代謝', f:['蛋2顆約20µg']},
+    {n:'維生素C', r:'100 mg', role:'肉鹼合成；幫助植物性鐵吸收', f:['芭樂半顆','或奇異果1至2顆']},
+    {n:'鐵', r:'10／15 mg', role:'肉鹼合成、電子傳遞鏈、甲狀腺功能、血液運送氧氣', f:['牛腱100g約3mg','豬肝50g約5mg','紅莧菜100g約3至4mg']},
+    {n:'鎂', r:'380／320 mg', role:'脂解、脂肪酸活化（ATP要和鎂結合才能使用）', f:['糙米飯1碗約80mg','南瓜子10g約50mg','熟菠菜1碗約80mg']},
+    {n:'鋅', r:'15／12 mg', role:'多種酵素的輔因子', f:['蚵仔100g約10mg以上','牛肉100g約4至6mg','南瓜子30g約2mg']},
+    {n:'硒', r:'55 µg', role:'甲狀腺荷爾蒙活化', f:['鮪魚100g約80µg','雞胸100g約25µg','蛋1顆約15µg','巴西堅果一天最多1至2顆']},
+    {n:'銅', r:'約0.9 mg', role:'電子傳遞鏈', f:['腰果30g約0.6mg']}
+  ];
+  var STALL = [
+    {c:'代謝適應', ev:'strong', clue:'已減重超過10%、赤字超過8至12週、日常活動變少', act:'看步數趨勢，安排一段維持期'},
+    {c:'睡眠不足、肌肉流失', ev:'strong', clue:'體重有降，但體脂和腰圍不動', act:'檢查睡眠時數，測身體組成'},
+    {c:'水分滯留', ev:'pre', clue:'體重突然卡住、壓力大、經前期', act:'改看一週平均體重和腰圍'},
+    {c:'鐵、B群不足', ev:'strong', clue:'疲勞、心跳偏高、運動表現下降', act:'就醫抽血驗ferritin，檢視飲食'},
+    {c:'甲狀腺功能', ev:'lab', clue:'怕冷、便秘、皮膚乾、經期改變', act:'就醫抽血驗TSH、free T4、free T3'},
+    {c:'胰島素阻抗', ev:'lab', clue:'飢餓感強、餐後嗜睡、腰圍大', act:'就醫檢查空腹血糖、HbA1c'},
+    {c:'腸道菌相', ev:'pre', clue:'膳食纖維吃得少、排便不規律', act:'逐步提高纖維和全穀的量'}
+  ];
+  var SYMS = [
+    ['減重已超過10%',0],['赤字超過8週',0],['日常活動變少',0],
+    ['體重降但腰圍不動',1],
+    ['體重突然卡住',2],['壓力大',2],['經前期',2],
+    ['疲勞',3],['心跳偏高',3],['運動表現下降',3],
+    ['怕冷',4],['便秘',4],['皮膚乾',4],['經期改變',4],
+    ['飢餓感強',5],['餐後嗜睡',5],['腰圍大',5],
+    ['纖維吃得少',6],['排便不規律',6]
+  ];
+  var EV = {strong:['strong','證據較強'], pre:['pre','初步證據'], lab:['lab','需抽血確認']};
+  var WK = ['一','二','三','四','五','六','日'];
+
+  // ---------- 儲存 ----------
+  var canStore = true;
+  try { localStorage.setItem('fl-test','1'); localStorage.removeItem('fl-test'); } catch(e){ canStore = false; }
+  function load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+  function save(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+
+  function ymd(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function mondayOf(d){ var m = new Date(d.getFullYear(), d.getMonth(), d.getDate()); var w = (m.getDay()+6)%7; m.setDate(m.getDate()-w); return m; }
+
+  var daily = load('fl-daily') || {};
+  var weekly = load('fl-weekly') || {};
+
+  // 換日清每日項目，換週（週一）清每週項目
+  function ensureFresh(){
+    var now = new Date(), today = ymd(now), wk = ymd(mondayOf(now)), changed = false;
+    if (daily.date !== today){ daily = {date:today, done:{}}; changed = true; }
+    if (weekly.week !== wk){ weekly = {week:wk, counts:{}, days:{}}; changed = true; }
+    if (changed){ save('fl-daily', daily); save('fl-weekly', weekly); }
+    return changed;
+  }
+
+  // ---------- 清單 ----------
+  function dailyCount(){ return DAILY.filter(function(x){ return daily.done[x.id]; }).length; }
+
+  function renderDaily(){
+    var now = new Date();
+    document.getElementById('todayLabel').textContent = (now.getMonth()+1)+'月'+now.getDate()+'日（'+WK[(now.getDay()+6)%7]+'）';
+    var box = document.getElementById('dailyList'); box.innerHTML = '';
+    DAILY.forEach(function(x){
+      var el = document.createElement('label');
+      el.className = 'item' + (daily.done[x.id] ? ' done' : '');
+      el.innerHTML = '<input type="checkbox"'+(daily.done[x.id]?' checked':'')+'><span class="box"></span><span class="txt"><b>'+x.t+'</b><small>'+x.n+'</small></span>';
+      el.querySelector('input').addEventListener('change', function(e){
+        ensureFresh();
+        if (e.target.checked) daily.done[x.id] = 1; else delete daily.done[x.id];
+        weekly.days[daily.date] = dailyCount();
+        save('fl-daily', daily); save('fl-weekly', weekly);
+        renderAll();
+      });
+      box.appendChild(el);
+    });
+    var c = dailyCount();
+    document.getElementById('dailyProg').textContent = '完成 '+c+' ／ '+DAILY.length;
+    document.getElementById('dailyMeter').style.width = (c/DAILY.length*100)+'%';
+  }
+
+  function renderWeekly(){
+    var mon = mondayOf(new Date()), sun = new Date(mon); sun.setDate(mon.getDate()+6);
+    document.getElementById('weekLabel').textContent = (mon.getMonth()+1)+'/'+mon.getDate()+' 至 '+(sun.getMonth()+1)+'/'+sun.getDate();
+    var box = document.getElementById('weeklyList'); box.innerHTML = '';
+    var met = 0, total = 0;
+    WEEKLY.forEach(function(x){
+      var n = weekly.counts[x.id] || 0, ok = x.min > 0 ? n >= x.min : n > 0;
+      if (x.min > 0){ total++; if (ok) met++; }
+      var el = document.createElement('div');
+      el.className = 'witem' + (ok ? ' met' : '');
+      var dots = '';
+      for (var i=0; i<x.max; i++){
+        dots += '<button class="dot'+(i<n?' on':'')+(i>=x.min && x.min>0?' opt':'')+'" data-i="'+i+'" aria-label="第'+(i+1)+'次"></button>';
+      }
+      el.innerHTML = '<div class="row"><div><b>'+x.t+'</b><small>'+x.n+'</small></div><div class="dots">'+dots+'</div></div>';
+      el.querySelectorAll('.dot').forEach(function(b){
+        b.addEventListener('click', function(){
+          ensureFresh();
+          var i = +b.getAttribute('data-i'), cur = weekly.counts[x.id] || 0;
+          weekly.counts[x.id] = (cur === i+1) ? i : i+1;
+          save('fl-weekly', weekly);
+          renderAll();
+        });
+      });
+      box.appendChild(el);
+    });
+    document.getElementById('weeklyProg').textContent = '達標 '+met+' ／ '+total;
+    document.getElementById('weeklyMeter').style.width = (met/total*100)+'%';
+
+    var bars = document.getElementById('weekBars'); bars.innerHTML = '';
+    var today = ymd(new Date());
+    for (var d=0; d<7; d++){
+      var day = new Date(mon); day.setDate(mon.getDate()+d);
+      var key = ymd(day), v = weekly.days[key] || 0;
+      var cls = 'wd' + (key===today ? ' today' : '') + (key>today ? ' future' : '');
+      bars.insertAdjacentHTML('beforeend', '<div class="'+cls+'"><div class="bar"><i style="height:'+(v/DAILY.length*100)+'%"></i></div>'+WK[d]+'</div>');
+    }
+  }
+
+  function renderAll(){ renderDaily(); renderWeekly(); }
+
+  document.getElementById('resetDaily').addEventListener('click', function(){
+    if (!confirm('確定清空今天的勾選？')) return;
+    daily.done = {}; weekly.days[daily.date] = 0;
+    save('fl-daily', daily); save('fl-weekly', weekly); renderAll();
+  });
+  document.getElementById('resetWeekly').addEventListener('click', function(){
+    if (!confirm('確定清空本週的紀錄？')) return;
+    weekly.counts = {}; weekly.days = {}; weekly.days[daily.date] = dailyCount();
+    save('fl-weekly', weekly); renderAll();
+  });
+  if (!canStore) document.getElementById('storeWarn').style.display = 'block';
+
+  // 頁面開著跨過午夜，或從背景切回來時，重新檢查日期
+  function recheck(){ if (ensureFresh()) renderAll(); }
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) recheck(); });
+  window.addEventListener('focus', recheck);
+  setInterval(recheck, 60000);
+
+  // ---------- 代謝路徑 ----------
+  var pathBox = document.getElementById('pathList');
+  STAGES.forEach(function(s, i){
+    var chips = s.need.map(function(x){ return '<span class="chip">'+x+'</span>'; }).join('');
+    var side = s.side ? '<p class="small" style="margin:0 0 4px">奇數碳脂肪酸另外需要：</p><div class="chips">'+s.side.map(function(x){ return '<span class="chip side">'+x+'</span>'; }).join('')+'</div>' : '';
+    var el = document.createElement('div');
+    el.className = 'step';
+    el.innerHTML = '<span class="num">'+(i+1)+'</span><button class="head" aria-expanded="false"><span><span class="t">'+s.t+'</span><span class="s">'+s.s+'</span></span><span class="chev">›</span></button>'
+      + '<div class="body"><p>'+s.d+'</p><p class="small" style="margin:0 0 4px">需要的營養素：</p><div class="chips">'+chips+'</div>'+side+'</div>';
+    el.querySelector('.head').addEventListener('click', function(){
+      var open = el.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    });
+    pathBox.appendChild(el);
+  });
+
+  // ---------- 營養素卡 ----------
+  var nc = document.getElementById('ncards');
+  NUTS.forEach(function(x){
+    nc.insertAdjacentHTML('beforeend', '<div class="card ncard"><h3>'+x.n+'<span class="rda">'+x.r+'</span></h3><p class="role">參與：'+x.role+'</p><ul>'+x.f.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul></div>');
+  });
+
+  // ---------- 蛋白質計算 ----------
+  var train = 0;
+  function calc(){
+    var w = parseFloat(document.getElementById('bw').value), out = document.getElementById('protOut');
+    if (!w || w < 30 || w > 250){ out.className = 'small'; out.innerHTML = '輸入體重後會顯示每天建議的蛋白質範圍。'; return; }
+    var lo = train ? 1.6 : 1.2, hi = train ? 2.2 : 1.6;
+    var a = Math.round(w*lo), b = Math.round(w*hi);
+    out.className = '';
+    out.innerHTML = '<div class="small">每天建議蛋白質</div><div class="result">'+a+' 至 '+b+' g</div>'
+      + '<div class="small">以每公斤 '+lo+' 至 '+hi+' g 計算。分三餐吃，每餐約 '+Math.round(a/3)+' 至 '+Math.round(b/3)+' g。100g 雞胸肉約有23g蛋白質。</div>';
+  }
+  document.getElementById('bw').addEventListener('input', calc);
+  document.querySelectorAll('#trainSeg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#trainSeg button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on'); train = +b.getAttribute('data-v'); calc();
+    });
+  });
+
+  // ---------- 停滯檢查 ----------
+  var picked = {};
+  var symBox = document.getElementById('symList'), stallBox = document.getElementById('stallList');
+  STALL.forEach(function(s, i){
+    var e = EV[s.ev];
+    stallBox.insertAdjacentHTML('beforeend', '<div class="card stall" data-i="'+i+'"><h3>'+s.c+'<span class="badge '+e[0]+'">'+e[1]+'</span></h3><p class="clue">線索：'+s.clue+'</p><p class="ev"><b>建議評估：</b>'+s.act+'</p></div>');
+  });
+  function filterStall(){
+    var rows = {}, any = false;
+    SYMS.forEach(function(x, k){ if (picked[k]){ rows[x[1]] = 1; any = true; } });
+    stallBox.querySelectorAll('.stall').forEach(function(el){
+      el.classList.toggle('hide', any && !rows[el.getAttribute('data-i')]);
+    });
+  }
+  SYMS.forEach(function(x, k){
+    var b = document.createElement('button');
+    b.textContent = x[0];
+    b.addEventListener('click', function(){
+      if (picked[k]) delete picked[k]; else picked[k] = 1;
+      b.classList.toggle('on', !!picked[k]); filterStall();
+    });
+    symBox.appendChild(b);
+  });
+
+  // ---------- 分頁 ----------
+  function route(){
+    var id = (location.hash || '#home').slice(1);
+    if (!document.getElementById(id) || !document.getElementById(id).classList.contains('page')) id = 'home';
+    document.querySelectorAll('section.page').forEach(function(s){ s.classList.toggle('on', s.id === id); });
+    document.querySelectorAll('#nav a').forEach(function(a){
+      var on = a.getAttribute('href') === '#'+id;
+      a.classList.toggle('on', on);
+      if (on && a.scrollIntoView) a.scrollIntoView({block:'nearest', inline:'center'});
+    });
+    window.scrollTo(0, 0);
+    if (id === 'checklist') recheck();
+  }
+  window.addEventListener('hashchange', route);
+
+  ensureFresh();
+  renderAll();
+  route();
+})();
+</script>
+</body>
+</html>

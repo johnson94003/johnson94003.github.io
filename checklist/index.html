@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>減脂每週清單｜營養師李宗澄</title>
+<meta name="description" content="把脂肪代謝需要的營養素換成具體的食物，每天、每週打勾確認有吃到。">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="減脂清單">
+<meta name="theme-color" content="#1a4d3a">
+<style>
+  :root{
+    --ink:#1f2a24; --sub:#5f6b64; --faint:#8b958f; --line:#e3e8e4;
+    --bg:#f7f8f6; --card:#ffffff; --brand:#1a4d3a; --brand-soft:#e8f0eb;
+    --accent-soft:#f6ede3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e6ebe7; --sub:#a9b4ad; --faint:#7d8781; --line:#2c3530;
+      --bg:#141917; --card:#1c2320; --brand:#8cc4a5; --brand-soft:#21312a;
+      --accent-soft:#33291f;
+    }
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    font-size:17px; line-height:1.8;
+  }
+  main{ max-width:640px; margin:0 auto; padding:24px 16px 48px; }
+  .brand{ font-size:14px; color:var(--brand); font-weight:600; letter-spacing:1px; }
+  h1{ font-size:25px; line-height:1.4; margin:4px 0 10px; }
+  h2{ font-size:20px; margin:28px 0 6px; }
+  p{ margin:0 0 12px; }
+  .intro{ background:var(--brand-soft); border-radius:12px; padding:14px 16px; font-size:16px; }
+  .intro p:last-child{ margin:0; }
+  .small{ font-size:14px; color:var(--sub); }
+  .daybar{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin:0 0 8px; }
+  .daybar .date{ font-weight:600; }
+  .prog{ font-size:15px; color:var(--sub); }
+  .meter{ height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin:0 0 12px; }
+  .meter i{ display:block; height:100%; background:var(--brand); width:0; transition:width .25s; }
+  .item{ display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:0 0 8px; cursor:pointer; user-select:none; -webkit-user-select:none; }
+  .item input{ position:absolute; opacity:0; pointer-events:none; }
+  .box{ flex:0 0 26px; height:26px; border:2px solid var(--faint); border-radius:8px; margin-top:1px; display:flex; align-items:center; justify-content:center; }
+  .item.done .box{ background:var(--brand); border-color:var(--brand); }
+  .item.done .box::after{ content:""; width:7px; height:13px; border:solid var(--card); border-width:0 3px 3px 0; transform:rotate(45deg) translate(-1px,-1px); }
+  .item .txt{ flex:1; }
+  .item .txt b, .witem b{ display:block; font-weight:600; }
+  .item .txt small, .witem small{ display:block; font-size:14px; color:var(--sub); line-height:1.6; }
+  .item.done .txt b{ color:var(--sub); }
+  .witem{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:0 0 8px; }
+  .witem .row{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .witem.met b{ color:var(--brand); }
+  .dots{ display:flex; gap:6px; flex:0 0 auto; }
+  .dot{ width:30px; height:30px; border-radius:50%; border:2px solid var(--faint); background:transparent; padding:0; cursor:pointer; }
+  .dot.opt{ border-style:dashed; }
+  .dot.on{ background:var(--brand); border-color:var(--brand); }
+  .btns{ display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 0; }
+  button.ghost{ font:inherit; font-size:14px; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--sub); cursor:pointer; }
+  .warn{ display:none; background:var(--accent-soft); border-radius:12px; padding:12px 16px; font-size:15px; margin:12px 0; }
+  .howto{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:15px; }
+  .howto p:last-child{ margin:0; }
+  footer{ max-width:640px; margin:0 auto; padding:0 16px 40px; font-size:13px; color:var(--faint); line-height:1.7; }
+  footer a{ color:var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">營養師李宗澄</div>
+  <h1>減脂每週營養清單</h1>
+  <div class="intro">
+    <p>脂肪被代謝掉的過程，需要B群、鐵、鎂、鋅等營養素幫忙。這份清單把這些營養素換成具體的食物，每天、每週照著吃到，多數人的營養素就夠了。</p>
+    <p>減脂的速度還是由熱量赤字決定，這份清單用來確保減脂期間不缺營養素。</p>
+  </div>
+
+  <div class="warn" id="storeWarn">這個瀏覽器目前無法儲存紀錄（常見於無痕模式）。可以照常勾選，但關掉頁面後會消失。</div>
+
+  <h2>每天</h2>
+  <div class="daybar"><span class="date" id="todayLabel"></span><span class="prog" id="dailyProg"></span></div>
+  <div class="meter"><i id="dailyMeter"></i></div>
+  <div id="dailyList"></div>
+  <p class="small">每天換日時自動清空。</p>
+
+  <h2>每週</h2>
+  <div class="daybar"><span class="date" id="weekLabel"></span><span class="prog" id="weeklyProg"></span></div>
+  <div class="meter"><i id="weeklyMeter"></i></div>
+  <div id="weeklyList"></div>
+  <p class="small">每吃一次點一個圓圈，再點一次可以取消。虛線圓圈是可以多吃的次數。每週一自動清空。</p>
+
+  <div class="btns">
+    <button class="ghost" id="resetDaily">清空今天</button>
+    <button class="ghost" id="resetWeekly">清空本週</button>
+  </div>
+
+  <h2>加到手機主畫面</h2>
+  <div class="howto">
+    <p><b>iPhone：</b>Safari 點分享按鈕，選「加入主畫面」。</p>
+    <p><b>Android：</b>Chrome 點右上角選單，選「加到主畫面」。</p>
+  </div>
+  <p class="small" style="margin-top:10px">紀錄只存在你這支手機的瀏覽器裡，別人看不到。換手機或清除瀏覽器資料後會重新開始。</p>
+</main>
+
+<footer>
+  想知道每項食物對應哪些營養素、脂肪怎麼被代謝，可以看<a href="../fatloss/">完整版指南</a>。<br>
+  本清單為衛教用途，不取代個別醫療建議。© 營養師李宗澄
+</footer>
+
+<script>
+(function(){
+  var DAILY = [
+    {id:'grain', t:'全穀雜糧至少1餐', n:'糙米、燕麥、地瓜、全麥麵包都算。'},
+    {id:'egg',   t:'蛋1至2顆', n:''},
+    {id:'dairy', t:'乳品1.5至2杯', n:'牛奶、無糖優格、起司都算。'},
+    {id:'prot',  t:'蛋白質每餐一掌心', n:'肉、魚、蛋、豆製品。'},
+    {id:'veg',   t:'蔬菜3份以上，深綠色至少1碗', n:''},
+    {id:'vitc',  t:'高維生素C水果1份', n:'芭樂半顆或奇異果1至2顆。'},
+    {id:'nut',   t:'堅果種子1份', n:'南瓜子優先。'}
+  ];
+  var WEEKLY = [
+    {id:'red',   t:'紅肉2至3次', min:2, max:3, n:'牛肉、羊肉。'},
+    {id:'shell', t:'貝類1至2次', min:1, max:2, n:'蚵仔、蛤蜊。'},
+    {id:'fish',  t:'魚2至3次', min:2, max:3, n:'其中1次選鮪魚、鯖魚或鮭魚。'},
+    {id:'pork',  t:'豬肉2次', min:2, max:2, n:''},
+    {id:'soy',   t:'豆製品3次以上', min:3, max:5, n:'豆腐、豆干、豆漿。'},
+    {id:'mush',  t:'菇類3次', min:3, max:3, n:''},
+    {id:'sea',   t:'海帶或紫菜1至2次', min:1, max:2, n:'平時用加碘鹽。'},
+    {id:'liver', t:'豬肝每兩週1次（可選）', min:0, max:1, n:'這週吃過，下週可以不吃。'}
+  ];
+  var WK = ['一','二','三','四','五','六','日'];
+
+  // 與完整版共用同一組儲存鍵，兩個頁面的勾選會同步
+  var canStore = true;
+  try { localStorage.setItem('fl-test','1'); localStorage.removeItem('fl-test'); } catch(e){ canStore = false; }
+  function load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+  function save(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+
+  function ymd(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function mondayOf(d){ var m = new Date(d.getFullYear(), d.getMonth(), d.getDate()); m.setDate(m.getDate()-(m.getDay()+6)%7); return m; }
+
+  var daily = load('fl-daily') || {};
+  var weekly = load('fl-weekly') || {};
+
+  // 換日清每日項目，換週（週一）清每週項目
+  function ensureFresh(){
+    var now = new Date(), today = ymd(now), wk = ymd(mondayOf(now)), changed = false;
+    if (daily.date !== today){ daily = {date:today, done:{}}; changed = true; }
+    if (weekly.week !== wk){ weekly = {week:wk, counts:{}, days:{}}; changed = true; }
+    if (!weekly.days) weekly.days = {};
+    if (changed){ save('fl-daily', daily); save('fl-weekly', weekly); }
+    return changed;
+  }
+  function dailyCount(){ return DAILY.filter(function(x){ return daily.done[x.id]; }).length; }
+  function sub(n){ return n ? '<small>'+n+'</small>' : ''; }
+
+  function renderDaily(){
+    var now = new Date();
+    document.getElementById('todayLabel').textContent = (now.getMonth()+1)+'月'+now.getDate()+'日（'+WK[(now.getDay()+6)%7]+'）';
+    var box = document.getElementById('dailyList'); box.innerHTML = '';
+    DAILY.forEach(function(x){
+      var el = document.createElement('label');
+      el.className = 'item' + (daily.done[x.id] ? ' done' : '');
+      el.innerHTML = '<input type="checkbox"'+(daily.done[x.id]?' checked':'')+'><span class="box"></span><span class="txt"><b>'+x.t+'</b>'+sub(x.n)+'</span>';
+      el.querySelector('input').addEventListener('change', function(e){
+        ensureFresh();
+        if (e.target.checked) daily.done[x.id] = 1; else delete daily.done[x.id];
+        weekly.days[daily.date] = dailyCount();
+        save('fl-daily', daily); save('fl-weekly', weekly);
+        renderAll();
+      });
+      box.appendChild(el);
+    });
+    var c = dailyCount();
+    document.getElementById('dailyProg').textContent = '完成 '+c+' ／ '+DAILY.length;
+    document.getElementById('dailyMeter').style.width = (c/DAILY.length*100)+'%';
+  }
+
+  function renderWeekly(){
+    var mon = mondayOf(new Date()), sun = new Date(mon); sun.setDate(mon.getDate()+6);
+    document.getElementById('weekLabel').textContent = (mon.getMonth()+1)+'/'+mon.getDate()+' 至 '+(sun.getMonth()+1)+'/'+sun.getDate();
+    var box = document.getElementById('weeklyList'); box.innerHTML = '';
+    var met = 0, total = 0;
+    WEEKLY.forEach(function(x){
+      var n = weekly.counts[x.id] || 0, ok = x.min > 0 ? n >= x.min : n > 0;
+      if (x.min > 0){ total++; if (ok) met++; }
+      var dots = '';
+      for (var i=0; i<x.max; i++){
+        dots += '<button class="dot'+(i<n?' on':'')+(i>=x.min && x.min>0?' opt':'')+'" data-i="'+i+'" aria-label="第'+(i+1)+'次"></button>';
+      }
+      var el = document.createElement('div');
+      el.className = 'witem' + (ok ? ' met' : '');
+      el.innerHTML = '<div class="row"><div><b>'+x.t+'</b>'+sub(x.n)+'</div><div class="dots">'+dots+'</div></div>';
+      el.querySelectorAll('.dot').forEach(function(b){
+        b.addEventListener('click', function(){
+          ensureFresh();
+          var i = +b.getAttribute('data-i'), cur = weekly.counts[x.id] || 0;
+          weekly.counts[x.id] = (cur === i+1) ? i : i+1;
+          save('fl-weekly', weekly);
+          renderAll();
+        });
+      });
+      box.appendChild(el);
+    });
+    document.getElementById('weeklyProg').textContent = '達標 '+met+' ／ '+total;
+    document.getElementById('weeklyMeter').style.width = (met/total*100)+'%';
+  }
+
+  function renderAll(){ renderDaily(); renderWeekly(); }
+
+  document.getElementById('resetDaily').addEventListener('click', function(){
+    if (!confirm('確定清空今天的勾選？')) return;
+    daily.done = {}; weekly.days[daily.date] = 0;
+    save('fl-daily', daily); save('fl-weekly', weekly); renderAll();
+  });
+  document.getElementById('resetWeekly').addEventListener('click', function(){
+    if (!confirm('確定清空本週的紀錄？')) return;
+    weekly.counts = {}; weekly.days = {}; weekly.days[daily.date] = dailyCount();
+    save('fl-weekly', weekly); renderAll();
+  });
+  if (!canStore) document.getElementById('storeWarn').style.display = 'block';
+
+  // 頁面開著跨過午夜，或從背景切回來時，重新檢查日期
+  function recheck(){ if (ensureFresh()) renderAll(); }
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) recheck(); });
+  window.addEventListener('focus', recheck);
+  setInterval(recheck, 60000);
+
+  ensureFresh();
+  renderAll();
+})();
+</script>
+</body>
+</html>
