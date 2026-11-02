@@ -54,6 +54,8 @@
   .witem{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:0 0 8px; }
   .witem .row{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
   .witem.met b{ color:var(--brand); }
+  .foods{ display:flex; flex-wrap:wrap; gap:5px; margin:6px 0 6px; }
+  .foods span{ font-size:14px; line-height:1.5; padding:2px 9px; border-radius:999px; background:var(--brand-soft); color:var(--ink); }
   .dots{ display:flex; gap:6px; flex:0 0 auto; }
   .dot{ width:30px; height:30px; border-radius:50%; border:2px solid var(--faint); background:transparent; padding:0; cursor:pointer; }
   .dot.opt{ border-style:dashed; }
@@ -111,23 +113,53 @@
 <script>
 (function(){
   var DAILY = [
-    {id:'grain', t:'全穀雜糧至少1餐', n:'糙米、燕麥、地瓜、全麥麵包都算。'},
-    {id:'egg',   t:'蛋1至2顆', n:''},
-    {id:'dairy', t:'乳品1.5至2杯', n:'牛奶、無糖優格、起司都算。'},
-    {id:'prot',  t:'蛋白質每餐一掌心', n:'肉、魚、蛋、豆製品。'},
-    {id:'veg',   t:'蔬菜3份以上，深綠色至少1碗', n:''},
-    {id:'vitc',  t:'高維生素C水果1份', n:'芭樂半顆或奇異果1至2顆。'},
-    {id:'nut',   t:'堅果種子1份', n:'南瓜子優先。'}
+    {id:'grain', t:'全穀雜糧至少1餐',
+     f:['糙米飯','五穀米飯','燕麥片','全麥吐司','地瓜','玉米','南瓜','芋頭','紅豆、綠豆','蕎麥麵'],
+     n:'白飯換成一半糙米或五穀米也算。早餐吃燕麥片或地瓜，最容易達成。'},
+    {id:'egg',   t:'蛋1至2顆',
+     f:['水煮蛋','茶葉蛋','荷包蛋','蒸蛋','番茄炒蛋','蛋花湯','超商溫泉蛋'],
+     n:'早餐加1顆茶葉蛋或水煮蛋，是最簡單的做法。'},
+    {id:'dairy', t:'乳品1.5至2杯',
+     f:['鮮奶','低脂鮮奶','無糖優格','無糖優酪乳','起司片','奶粉'],
+     n:'1杯是240ml鮮奶，大約等於2片起司片或3湯匙奶粉。喝牛奶容易脹氣的人，可以改吃優格或起司。豆漿屬於豆製品，不算乳品。'},
+    {id:'prot',  t:'蛋白質每餐一掌心',
+     f:['雞胸肉','去皮雞腿','魚片','蝦仁','豬里肌','瘦牛肉','蛋','板豆腐','豆干','毛豆'],
+     n:'一掌心是手掌大小、手掌厚度的量。外食可以選便當的主菜，或超商雞胸肉、茶葉蛋加豆干。'},
+    {id:'veg',   t:'蔬菜3份以上，深綠色至少1碗',
+     f:['菠菜','地瓜葉','空心菜','青江菜','綠花椰菜','芥藍','莧菜','高麗菜','番茄','紅蘿蔔','甜椒'],
+     n:'1份大約是煮熟後半碗。前面七種是深綠色蔬菜。外食時便當多加一份燙青菜，或吃自助餐時夾兩到三樣青菜。'},
+    {id:'vitc',  t:'高維生素C水果1份',
+     f:['芭樂','奇異果','柳丁','橘子','草莓','木瓜','小番茄'],
+     n:'1份大約是一個拳頭大小，例如芭樂半顆或奇異果1至2顆。吃植物性的鐵時一起吃，可以幫助鐵吸收。'},
+    {id:'nut',   t:'堅果種子1份',
+     f:['南瓜子','葵花子','杏仁','腰果','核桃','黑芝麻','無調味綜合堅果'],
+     n:'1份大約1湯匙。南瓜子的鎂和鋅比較多，可以優先選。挑無調味、沒有加糖或加鹽的。'}
   ];
   var WEEKLY = [
-    {id:'red',   t:'紅肉2至3次', min:2, max:3, n:'牛肉、羊肉。'},
-    {id:'shell', t:'貝類1至2次', min:1, max:2, n:'蚵仔、蛤蜊。'},
-    {id:'fish',  t:'魚2至3次', min:2, max:3, n:'其中1次選鮪魚、鯖魚或鮭魚。'},
-    {id:'pork',  t:'豬肉2次', min:2, max:2, n:''},
-    {id:'soy',   t:'豆製品3次以上', min:3, max:5, n:'豆腐、豆干、豆漿。'},
-    {id:'mush',  t:'菇類3次', min:3, max:3, n:''},
-    {id:'sea',   t:'海帶或紫菜1至2次', min:1, max:2, n:'平時用加碘鹽。'},
-    {id:'liver', t:'豬肝每兩週1次（可選）', min:0, max:1, n:'這週吃過，下週可以不吃。'}
+    {id:'red',   t:'紅肉2至3次', min:2, max:3,
+     f:['牛腱','火鍋牛肉片','牛排','牛肉麵的牛肉','羊肉爐','沙茶羊肉'],
+     n:'紅肉的鐵和鋅比白肉多，而且比較好吸收。'},
+    {id:'shell', t:'貝類1至2次', min:1, max:2,
+     f:['蚵仔湯','蚵仔麵線','蛤蜊湯','海瓜子','淡菜','干貝'],
+     n:'蚵仔的鋅特別多，100g大約就有10mg以上。'},
+    {id:'fish',  t:'魚2至3次', min:2, max:3,
+     f:['鮭魚','鯖魚','水煮鮪魚罐頭','秋刀魚','虱目魚','鱸魚','鯛魚'],
+     n:'其中1次選鮪魚、鯖魚或鮭魚。超商的鮪魚飯糰、鯖魚便當都可以算。'},
+    {id:'pork',  t:'豬肉2次', min:2, max:2,
+     f:['豬里肌','腰內肉','瘦豬肉片','滷豬腱','豬肉片炒青菜'],
+     n:'豬肉的維生素B1很多，選瘦一點的部位。'},
+    {id:'soy',   t:'豆製品3次以上', min:3, max:5,
+     f:['板豆腐','嫩豆腐','豆干','無糖豆漿','毛豆','豆包','干絲'],
+     n:'板豆腐的鈣和蛋白質比嫩豆腐多。豆漿選無糖的。'},
+    {id:'mush',  t:'菇類3次', min:3, max:3,
+     f:['香菇','杏鮑菇','金針菇','鴻喜菇','秀珍菇','木耳'],
+     n:'煮湯、炒青菜、火鍋都可以加一把。'},
+    {id:'sea',   t:'海帶或紫菜1至2次', min:1, max:2,
+     f:['海帶芽湯','紫菜湯','海帶結','滷海帶','無調味海苔'],
+     n:'海藻類提供碘。平時煮菜用加碘鹽。'},
+    {id:'liver', t:'豬肝每兩週1次（可選）', min:0, max:1,
+     f:['豬肝湯','麻油豬肝','滷豬肝'],
+     n:'鐵和B12很多。這週吃過，下週可以不吃。懷孕期間要吃之前，先問醫師。'}
   ];
   var WK = ['一','二','三','四','五','六','日'];
 
@@ -153,7 +185,10 @@
     return changed;
   }
   function dailyCount(){ return DAILY.filter(function(x){ return daily.done[x.id]; }).length; }
-  function sub(n){ return n ? '<small>'+n+'</small>' : ''; }
+  function sub(x){
+    var foods = x.f ? '<span class="foods">'+x.f.map(function(f){ return '<span>'+f+'</span>'; }).join('')+'</span>' : '';
+    return foods + (x.n ? '<small>'+x.n+'</small>' : '');
+  }
 
   function renderDaily(){
     var now = new Date();
@@ -162,7 +197,7 @@
     DAILY.forEach(function(x){
       var el = document.createElement('label');
       el.className = 'item' + (daily.done[x.id] ? ' done' : '');
-      el.innerHTML = '<input type="checkbox"'+(daily.done[x.id]?' checked':'')+'><span class="box"></span><span class="txt"><b>'+x.t+'</b>'+sub(x.n)+'</span>';
+      el.innerHTML = '<input type="checkbox"'+(daily.done[x.id]?' checked':'')+'><span class="box"></span><span class="txt"><b>'+x.t+'</b>'+sub(x)+'</span>';
       el.querySelector('input').addEventListener('change', function(e){
         ensureFresh();
         if (e.target.checked) daily.done[x.id] = 1; else delete daily.done[x.id];
@@ -191,7 +226,7 @@
       }
       var el = document.createElement('div');
       el.className = 'witem' + (ok ? ' met' : '');
-      el.innerHTML = '<div class="row"><div><b>'+x.t+'</b>'+sub(x.n)+'</div><div class="dots">'+dots+'</div></div>';
+      el.innerHTML = '<div class="row"><b>'+x.t+'</b><div class="dots">'+dots+'</div></div>'+sub(x);
       el.querySelectorAll('.dot').forEach(function(b){
         b.addEventListener('click', function(){
           ensureFresh();
